@@ -1,0 +1,22 @@
+---
+require:
+  - rubocop
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.2
+  Exclude:
+    - 'config.ru'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'lib/pb/**/*'
+    - 'vendor/**/*'
+    - '.{idea,circleci,bundle}/**/*'
+    - 'tmp/**/*'
+  NewCops: enable
+
+inherit_from:
+  - 'rubocop/lint.yml'
+  - 'rubocop/style.yml'

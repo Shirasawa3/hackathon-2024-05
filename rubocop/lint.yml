@@ -1,0 +1,7 @@
+# 条件分岐時の代入を許可
+Lint/AssignmentInCondition:
+  Enabled: false
+
+# 比較演算子の左項へのマジックナンバーの配置を許可
+Style/YodaCondition:
+  EnforcedStyle: forbid_for_equality_operators_only
