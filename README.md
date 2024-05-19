@@ -33,6 +33,17 @@ psql -h localhost -p 5432 -U hackathon -d hackathon-dev
 psql -h localhost -p 5432 -U hackathon -d hackathon-test
 ```
 
+デフォルトのユーザーでログイン
+```shellsession
+# PostgreSQL に入り，ユーザー "hackathon" に DB 作成の権限付与
+% psql -U <ユーザー名> -d postgres
+postgres=# ALTER ROLE hackathon WITH CREATEDB;
+ALTER ROLE
+postgres=# exit
+# PostgreSQL を再起動
+% brew services restart postgresql
+```
+
 参考
 - https://zenn.dev/eguchi244_dev/articles/sql-postresql-install-20230620#homebrew%E3%81%8B%E3%82%89%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B
 - https://qiita.com/Tiger-Kid/items/8cacb8b89a2d201f4cf8
