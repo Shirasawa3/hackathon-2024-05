@@ -12,4 +12,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def self.describe(_description = nil)
+    yield
+  end
+
+  def self.context(_description = nil)
+    yield
+  end
 end
