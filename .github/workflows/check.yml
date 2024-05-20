@@ -1,0 +1,52 @@
+name: "check"
+on:
+  push:
+    branches:
+      - "**"
+jobs:
+  minitest:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: "hackathon"
+          POSTGRES_USER: "username"
+          POSTGRES_PASSWORD: "password"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: "postgres://username:password@localhost:5432/hackathon"
+      RAILS_ENV: "test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Initialize database
+        run: |
+          bundle exec rake db:migrate
+          bundle exec rake db:seed
+      - name: Run tests
+        run: bundle exec rake test --verbose
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Lint Ruby files
+        run: bundle exec rubocop
