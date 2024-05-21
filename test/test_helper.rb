@@ -12,11 +12,32 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  def self.describe(_description = nil)
+  def self.describe(description)
+    return unless block_given?
+
+    @names ||= []
+    @names << description
     yield
+    @names.pop
   end
 
-  def self.context(_description = nil)
+  def self.context(description)
+    return unless block_given?
+
+    @names ||= []
+    @names << description
     yield
+    @names.pop
+  end
+
+  def self.test(description, &test_process)
+    @names ||= []
+    @names << description
+    test_method = test_process || proc do
+      skip
+    end
+    result = super(@names.compact.join(' '), &test_method)
+    @names.pop
+    result
   end
 end
