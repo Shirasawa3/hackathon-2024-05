@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_21_000423) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_21_095840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "item_basic_infos", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "max_lent_period"
+    t.bigint "item_type_id", null: false
+    t.integer "count"
+    t.string "tags", array: true
+    t.integer "status", default: 0, null: false
+    t.integer "item_basic_info_status", default: 0, null: false
+    t.boolean "is_extendable", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type_id"], name: "index_item_basic_infos_on_item_type_id"
+    t.index ["name", "item_type_id"], name: "index_item_basic_infos_on_name_and_item_type_id", unique: true
+  end
 
   create_table "item_types", force: :cascade do |t|
     t.string "name", null: false
@@ -21,4 +36,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_21_000423) do
     t.index ["name"], name: "index_item_types_on_name", unique: true
   end
 
+  add_foreign_key "item_basic_infos", "item_types"
 end

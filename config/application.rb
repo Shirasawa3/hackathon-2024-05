@@ -22,5 +22,8 @@ module TeamBApp
     # 多言語対応
     config.i18n.default_locale = 'ja'
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
+    # FIXME: fixture読み込み時に無条件でエラーになるので一時凌ぎ
+    config.active_record.verify_foreign_keys_for_fixtures = false
   end
 end

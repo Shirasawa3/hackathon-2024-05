@@ -2,9 +2,22 @@ ja:
   activerecord:
     models:
       item_type: 種別
+      item_base_info: 物品基本情報
     attributes:
       item_type:
         id: 種別ID
         name: 種別名
+        created_at: 作成日時
+        updated_at: 更新日時
+      item_basic_info:
+        id: 物品ID
+        name: 物品名
+        max_lent_period: 最大貸与期間
+        item_type_id: 種別ID
+        item_type: 種別
+        count: 会社所有数
+        tags: タグ一覧
+        status: ステータス
+        is_extendable: 延長可否
         created_at: 作成日時
         updated_at: 更新日時
