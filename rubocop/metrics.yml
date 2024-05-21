@@ -1,0 +1,3 @@
+# ブロックの行数を幾らでも許容
+Metrics/BlockLength:
+  Enabled: false
