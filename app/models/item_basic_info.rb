@@ -16,13 +16,13 @@ class ItemBasicInfo < ApplicationRecord
 
   # count を持つかどうかを表す値を取得する
   # @return [true, false]
-  def has_count?
+  def has_count? # rubocop:disable Naming/PredicateName
     !count.nil?
   end
 
   # tags を持つかどうかを表す値を取得する
   # @return [true, false]
-  def has_tags?
+  def has_tags? # rubocop:disable Naming/PredicateName
     !tags.nil?
   end
 
