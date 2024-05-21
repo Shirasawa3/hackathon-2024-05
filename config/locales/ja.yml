@@ -1,1 +1,10 @@
 ja:
+  activerecord:
+    models:
+      item_type: 種別
+    attributes:
+      item_type:
+        id: 種別ID
+        name: 種別名
+        created_at: 作成日時
+        updated_at: 更新日時
