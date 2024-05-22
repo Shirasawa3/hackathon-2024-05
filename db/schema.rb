@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_063624) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_102628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_063624) do
     t.datetime "returned_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tag"
     t.index ["item_basic_info_id"], name: "index_lent_histories_on_item_basic_info_id"
     t.index ["user_id"], name: "index_lent_histories_on_user_id"
   end
