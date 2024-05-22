@@ -9,6 +9,8 @@ ja:
       item_base_info: 物品基本情報
       user: 一般ユーザー
       lent_history: 貸出履歴
+      book: 書籍
+      headset: ヘッドセット
     attributes:
       user:
         id: ユーザーID
@@ -46,3 +48,9 @@ ja:
         lent_at: 貸出開始日時
         period: 返却期限
         returned_at: 返却日時
+      book:
+        item_basic_info_id: 基本情報ID
+        item_basic_info: 基本情報
+      headset:
+        item_basic_info_id: 基本情報ID
+        item_basic_info: 基本情報

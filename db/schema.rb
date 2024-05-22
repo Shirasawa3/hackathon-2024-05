@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_044306) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_061441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.bigint "item_basic_info_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_basic_info_id"], name: "index_books_on_item_basic_info_id"
+  end
+
+  create_table "headsets", force: :cascade do |t|
+    t.bigint "item_basic_info_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_basic_info_id"], name: "index_headsets_on_item_basic_info_id"
+  end
 
   create_table "item_basic_infos", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_044306) do
     t.index ["employee_id"], name: "index_users_on_employee_id", unique: true
   end
 
+  add_foreign_key "books", "item_basic_infos"
+  add_foreign_key "headsets", "item_basic_infos"
   add_foreign_key "item_basic_infos", "item_types"
   add_foreign_key "lent_histories", "item_basic_infos"
   add_foreign_key "lent_histories", "users"
