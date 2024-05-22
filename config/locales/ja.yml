@@ -1,4 +1,7 @@
 ja:
+  errors:
+    messages:
+      email_format: のフォーマットが無効です
   activerecord:
     models:
       item_type: 種別
