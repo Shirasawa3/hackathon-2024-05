@@ -3,6 +3,10 @@ ja:
     messages:
       email_format: のフォーマットが無効です
       equal_or_less_than_lent_at: は貸出開始日時より後に設定してください
+      empty_string_cannot_be_included: に空文字は含められません
+      count_and_tags_are_exclusive: とタグ一覧はどちらか一方のみ指定できます
+      count_or_tags_must_be_speficied: とタグ一覧どちらか一方を指定してください
+      must_be_unique: は一意である必要があります
   activerecord:
     models:
       item_type: 種別

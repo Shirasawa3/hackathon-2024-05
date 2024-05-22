@@ -3,3 +3,7 @@ en:
     messages:
       email_format: "Format of email address is invalid"
       equal_or_less_than_lent_at: "must represent beyond the lent_at"
+      empty_string_cannot_be_included: "cannot include empty string"
+      count_and_tags_are_exclusive: "and tags are exclusive"
+      count_or_tags_must_be_speficied: "or tags must be specified"
+      must_be_unique: "must be unique"

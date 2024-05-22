@@ -31,22 +31,19 @@ class ItemBasicInfo < ApplicationRecord
 
   # count と tags のバリデーション
   def count_and_tags_are_exclusive
-    # TODO: i18n対応
-    errors.add(:count, 'とタグ一覧はどちらか一方のみ指定できます') if !count.nil? && !tags.nil?
-    errors.add(:count, 'とタグ一覧どちらか一方を指定してください') if count.nil? && (tags.blank? || tags.empty?)
+    errors.add(:count, I18n.t('errors.messages.count_and_tags_are_exclusive')) if !count.nil? && !tags.nil?
+    errors.add(:count, I18n.t('errors.messages.count_or_tags_must_be_speficied')) if count.nil? && (tags.blank? || tags.empty?) # rubocop:disable Layout/LineLength
   end
 
   def tags_cannot_have_empty
     return unless tags
 
-    # TODO: i18n対応
-    errors.add(:tags, 'に空文字は含められません') if tags.any?(&:blank?)
+    errors.add(:tags, I18n.t('errors.messages.empty_string_cannot_be_included')) if tags.any?(&:blank?)
   end
 
   def tags_must_be_unique
     return unless tags
 
-    # TODO: i18n対応
-    errors.add(:tags, 'は一意である必要があります') if tags.uniq.length != tags.length
+    errors.add(:tags, I18n.t('errors.messages.must_be_unique')) if tags.uniq.length != tags.length
   end
 end
