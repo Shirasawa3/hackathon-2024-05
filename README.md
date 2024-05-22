@@ -69,3 +69,8 @@ cd hackathon_2024_5_team_b
 gem install bundler
 bundle install
 ```
+
+### DB初期化
+```zsh
+sh scripts/init_db.zh
+```
