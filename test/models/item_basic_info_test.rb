@@ -4,8 +4,7 @@ require 'test_helper'
 
 class ItemBasicInfoTest < ActiveSupport::TestCase
   def setup
-    type = ItemType.create!(name: 'book')
-    @info = ItemBasicInfo.new(name: 'bible', item_type: type, count: 1)
+    @info = ItemBasicInfo.new(name: 'bible', item_type: ItemType.first, count: 1)
   end
 
   describe 'validation' do

@@ -11,6 +11,22 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  # db/fixtures/*.yml を読み込ませる
+  def before_setup
+    super
+
+    ActiveRecord::FixtureSet.create_fixtures(Rails.root.join('db/fixtures'),
+                                             Dir.glob('*.yml',
+                                                      base: Rails.root.join('db/fixtures'))
+                                                .map { |f| f.sub('.yml', '') })
+  end
+
+  def before_teardown
+    super
+
+    ActiveRecord::FixtureSet.reset_cache
+  end
+
   # Add more helper methods to be used by all tests here...
   def self.describe(description)
     return unless block_given?

@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# frozen_string_literal: true
+
+(1..5).each do |i|
+  User.create!(id: i,first_name: "太郎#{i}号", last_name: '開発', employee_id: "D#{i}", email: "dev-#{i}@techouse.jp")
+end
+
+CorporateUser.create!(id: 1, first_name: '玲人', last_name: '工保', employee_id: 'C1', email: 'corporate@techouse.jp', password: 'password')
+
+Book.create!(id: 1, item_basic_info: ItemBasicInfo.new(item_type: ItemType.find(1), name: '書籍1', count: 3))
+Book.create!(id: 2, item_basic_info: ItemBasicInfo.new(item_type: ItemType.find(1), name: '書籍2', count: 1))
+Book.create!(id: 3, item_basic_info: ItemBasicInfo.new(item_type: ItemType.find(1), name: '隠し書籍', count: 1, status: :hidden))
