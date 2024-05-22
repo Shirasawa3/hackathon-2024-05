@@ -2,9 +2,13 @@
 
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class CorporateUserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(last_name: '田中', first_name: '太郎', employee_id: 'A101', email: 'taro.tanaka@techouse.jp')
+    @user = CorporateUser.new(last_name: '田中',
+                              first_name: '太郎',
+                              employee_id: 'A101',
+                              email: 'taro.tanaka@techouse.jp',
+                              password: 'password')
   end
 
   describe 'validation' do
@@ -158,10 +162,11 @@ class UserTest < ActiveSupport::TestCase
 
         context 'when employee_id is duplicated' do
           test 'fails' do
-            User.create!(first_name: 'duplicated',
-                         last_name: 'duplicated',
-                         employee_id: 'A101',
-                         email: 'hogehoge@techouse.jp')
+            CorporateUser.create!(first_name: 'duplicated',
+                                  last_name: 'duplicated',
+                                  employee_id: 'A101',
+                                  email: 'hogehoge@techouse.jp',
+                                  password: 'password')
 
             assert_not @user.valid?
             assert_equal 1, @user.errors.full_messages.length
@@ -208,10 +213,11 @@ class UserTest < ActiveSupport::TestCase
 
         context 'when email is duplicated' do
           test 'fails' do
-            User.create!(first_name: 'duplicated',
-                         last_name: 'duplicated',
-                         employee_id: 'A102',
-                         email: 'taro.tanaka@techouse.jp')
+            CorporateUser.create!(first_name: 'duplicated',
+                                  last_name: 'duplicated',
+                                  employee_id: 'A102',
+                                  email: 'taro.tanaka@techouse.jp',
+                                  password: 'password')
 
             assert_not @user.valid?
             assert_equal 1, @user.errors.full_messages.length
@@ -232,44 +238,6 @@ class UserTest < ActiveSupport::TestCase
         context 'when email is valid' do
           test 'success' do
             @user.email = 'tanaka.taro@techouse.jo'
-
-            assert @user.valid?
-          end
-        end
-      end
-    end
-
-    describe 'slack_channel' do
-      context 'when slack_channel is nil' do
-        test 'success' do
-          @user.slack_channel = nil
-
-          assert @user.valid?
-        end
-      end
-
-      context 'when slack_channel is empty' do
-        test 'fails' do
-          @user.slack_channel = ''
-
-          assert_not @user.valid?
-          assert_equal 1, @user.errors.full_messages.length
-          assert_equal 'Slack通知チャンネルを入力してください', @user.errors.full_messages.first
-        end
-      end
-
-      context 'when slack_channel is white spaces' do
-        test 'fails' do
-          @user.slack_channel = '  '
-
-          assert_not @user.valid?
-          assert_equal 1, @user.errors.full_messages.length
-          assert_equal 'Slack通知チャンネルを入力してください', @user.errors.full_messages.first
-        end
-
-        context 'when slack_channel is valid' do
-          test 'success' do
-            @user.slack_channel = 'ミドル'
 
             assert @user.valid?
           end
