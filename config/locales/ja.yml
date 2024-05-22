@@ -6,6 +6,7 @@ ja:
     models:
       item_type: 種別
       item_base_info: 物品基本情報
+      user: 一般ユーザー
     attributes:
       item_type:
         id: 種別ID
@@ -22,5 +23,15 @@ ja:
         tags: タグ一覧
         status: ステータス
         is_extendable: 延長可否
+        created_at: 作成日時
+        updated_at: 更新日時
+      user:
+        id: ユーザーID
+        first_name: 名
+        middle_name: ミドルネーム
+        last_name: 姓
+        employee_id: 社員番号
+        email: メールアドレス
+        slack_channel: Slack通知チャンネル
         created_at: 作成日時
         updated_at: 更新日時
