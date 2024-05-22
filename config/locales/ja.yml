@@ -1,0 +1,76 @@
+ja:
+  errors:
+    messages:
+      email_format: は不正な値です
+      equal_or_less_than_lent_at: は貸出開始日時より後に設定してください
+      empty_string_cannot_be_included: に空文字は含められません
+      count_and_tags_are_exclusive: とタグ一覧はどちらか一方のみ指定できます
+      count_or_tags_must_be_speficied: とタグ一覧どちらか一方を指定してください
+      must_be_unique: は一意である必要があります
+  activerecord:
+    models:
+      user: 一般ユーザー
+      corporate_user: コーポレートユーザー
+      item_type: 種別
+      item_base_info: 物品基本情報
+      lent_history: 貸出履歴
+      book: 書籍
+      headset: ヘッドセット
+    attributes:
+      corporate_user:
+        id: ユーザーID
+        first_name: 名
+        middle_name: ミドルネーム
+        last_name: 姓
+        employee_id: 社員番号
+        email: メールアドレス
+        created_at: 作成日時
+        updated_at: 更新日時
+      user:
+        id: ユーザーID
+        first_name: 名
+        middle_name: ミドルネーム
+        last_name: 姓
+        employee_id: 社員番号
+        email: メールアドレス
+        slack_channel: Slack通知チャンネル
+        created_at: 作成日時
+        updated_at: 更新日時
+      item_type:
+        id: 種別ID
+        name: 種別名
+        created_at: 作成日時
+        updated_at: 更新日時
+      item_basic_info:
+        id: 物品ID
+        name: 物品名
+        max_lent_period: 最大貸与期間
+        item_type_id: 種別ID
+        item_type: 種別
+        count: 会社所有数
+        tags: タグ一覧
+        status: ステータス
+        is_extendable: 延長可否
+        created_at: 作成日時
+        updated_at: 更新日時
+      lent_history:
+        id: 履歴ID
+        user_id: 対象ユーザーID
+        user: 対象ユーザー
+        item_basic_info_id: 物品ID
+        item_basic_info: 物品
+        lent_at: 貸出開始日時
+        period: 返却期限
+        returned_at: 返却日時
+      book:
+        id: 書籍ID
+        item_basic_info_id: 基本情報ID
+        item_basic_info: 基本情報
+        created_at: 作成日時
+        updated_at: 更新日時
+      headset:
+        id: 型番ID
+        item_basic_info_id: 基本情報ID
+        item_basic_info: 基本情報
+        created_at: 作成日時
+        updated_at: 更新日時

@@ -20,3 +20,4 @@ AllCops:
 inherit_from:
   - 'rubocop/lint.yml'
   - 'rubocop/style.yml'
+  - 'rubocop/metrics.yml'

@@ -1,0 +1,10 @@
+# ブロックの行数を幾らでも許容
+Metrics/BlockLength:
+  Enabled: false
+
+# クラスの行数を幾らでも許容
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false

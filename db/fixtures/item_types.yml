@@ -1,0 +1,7 @@
+book:
+  id: 1
+  name: 書籍
+
+headset:
+  id: 2
+  name: ヘッドセット
