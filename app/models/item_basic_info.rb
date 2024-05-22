@@ -2,6 +2,7 @@
 
 class ItemBasicInfo < ApplicationRecord
   belongs_to :item_type
+  has_many :lent_histories, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :item_type_id }
   validate :count_and_tags_are_exclusive, :tags_cannot_have_empty, :tags_must_be_unique

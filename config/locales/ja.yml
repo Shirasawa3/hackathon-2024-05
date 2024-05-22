@@ -2,12 +2,24 @@ ja:
   errors:
     messages:
       email_format: のフォーマットが無効です
+      equal_or_less_than_lent_at: は貸出開始日時より後に設定してください
   activerecord:
     models:
       item_type: 種別
       item_base_info: 物品基本情報
       user: 一般ユーザー
+      lent_history: 貸出履歴
     attributes:
+      user:
+        id: ユーザーID
+        first_name: 名
+        middle_name: ミドルネーム
+        last_name: 姓
+        employee_id: 社員番号
+        email: メールアドレス
+        slack_channel: Slack通知チャンネル
+        created_at: 作成日時
+        updated_at: 更新日時
       item_type:
         id: 種別ID
         name: 種別名
@@ -25,13 +37,12 @@ ja:
         is_extendable: 延長可否
         created_at: 作成日時
         updated_at: 更新日時
-      user:
-        id: ユーザーID
-        first_name: 名
-        middle_name: ミドルネーム
-        last_name: 姓
-        employee_id: 社員番号
-        email: メールアドレス
-        slack_channel: Slack通知チャンネル
-        created_at: 作成日時
-        updated_at: 更新日時
+      lent_history:
+        id: 履歴ID
+        user_id: 対象ユーザーID
+        user: 対象ユーザー
+        item_basic_info_id: 物品ID
+        item_basic_info: 物品
+        lent_at: 貸出開始日時
+        period: 返却期限
+        returned_at: 返却日時
