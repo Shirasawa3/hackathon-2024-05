@@ -17,6 +17,43 @@ class LentHistoryTest < ActiveSupport::TestCase
   end
 
   describe 'validation' do
+    describe 'tag' do
+      context 'when tag is nil' do
+        test 'success' do
+          @history.tag = nil
+          assert @history.valid?
+        end
+      end
+
+      context 'when tag is empty' do
+        test 'fails' do
+          @history.tag = ''
+
+          assert_not @history.valid?
+          assert_equal 1, @history.errors.full_messages.length
+          assert_equal 'タグ名を入力してください', @history.errors.full_messages.first
+        end
+      end
+
+      context 'when tag is white spaces' do
+        test 'fails' do
+          @history.tag = '  '
+
+          assert_not @history.valid?
+          assert_equal 1, @history.errors.full_messages.length
+          assert_equal 'タグ名を入力してください', @history.errors.full_messages.first
+        end
+      end
+
+      context 'when tag is valid' do
+        test 'success' do
+          @history.tag = 'TEC-0001'
+
+          assert @history.valid?
+        end
+      end
+    end
+
     describe 'lent_at' do
       context 'when lent_at is nil' do
         test 'fails' do
@@ -113,6 +150,32 @@ class LentHistoryTest < ActiveSupport::TestCase
           assert @history.valid?
         end
       end
+    end
+  end
+
+  describe '#in_lent' do
+    test 'returns records as not returned' do
+      @history.save!
+      LentHistory.create!(user: User.first!,
+                          item_basic_info: ItemBasicInfo.first!,
+                          lent_at: 3.days.ago,
+                          period: Time.current,
+                          returned_at: 1.day.ago)
+
+      assert_equal [@history], LentHistory.in_lent.to_a
+    end
+  end
+
+  describe '#not_in_lent' do
+    test 'returns records as returned' do
+      @history.save!
+      returned = LentHistory.create!(user: User.first!,
+                                     item_basic_info: ItemBasicInfo.first!,
+                                     lent_at: 3.days.ago,
+                                     period: Time.current,
+                                     returned_at: 1.day.ago)
+
+      assert_equal [returned], LentHistory.not_in_lent.to_a
     end
   end
 end

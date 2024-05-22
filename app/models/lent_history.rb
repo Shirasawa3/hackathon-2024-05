@@ -4,9 +4,18 @@ class LentHistory < ApplicationRecord
   belongs_to :user
   belongs_to :item_basic_info
 
+  validates :tag, presence: true, allow_nil: true
   validates :lent_at, presence: true
   validates :period, presence: true
   validate :validate_period_and_returned_at
+
+  # 現在貸出中のものを取得する
+  # return [ActiveRecord::Relation<LentHistory>]
+  scope :in_lent, -> { where(returned_at: nil) }
+
+  # 返却済のものを取得する
+  # return [ActiveRecord::Relation<LentHistory>]
+  scope :not_in_lent, -> { where.not(returned_at: nil) }
 
   private
 

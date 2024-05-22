@@ -59,6 +59,7 @@ ja:
         user: 対象ユーザー
         item_basic_info_id: 物品ID
         item_basic_info: 物品
+        tag: タグ名
         lent_at: 貸出開始日時
         period: 返却期限
         returned_at: 返却日時
