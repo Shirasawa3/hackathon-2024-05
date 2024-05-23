@@ -4,7 +4,11 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(last_name: '田中', first_name: '太郎', employee_id: 'A101', email: 'taro.tanaka@techouse.jp')
+    @user = User.new(last_name: '田中',
+                     first_name: '太郎',
+                     employee_id: 'A101',
+                     department: '本部',
+                     email: 'taro.tanaka@techouse.jp')
   end
 
   describe 'validation' do
@@ -160,6 +164,7 @@ class UserTest < ActiveSupport::TestCase
           test 'fails' do
             User.create!(first_name: 'duplicated',
                          last_name: 'duplicated',
+                         department: '本部',
                          employee_id: 'A101',
                          email: 'hogehoge@techouse.jp')
 
@@ -172,6 +177,46 @@ class UserTest < ActiveSupport::TestCase
         context 'when employee_id is valid' do
           test 'success' do
             @user.employee_id = 'A111'
+
+            assert @user.valid?
+          end
+        end
+      end
+    end
+
+    describe 'department' do
+      context 'when department is nil' do
+        test 'fails' do
+          @user.department = nil
+
+          assert_not @user.valid?
+          assert_equal 1, @user.errors.full_messages.length
+          assert_equal '所属を入力してください', @user.errors.full_messages.first
+        end
+      end
+
+      context 'when department is empty' do
+        test 'fails' do
+          @user.department = ''
+
+          assert_not @user.valid?
+          assert_equal 1, @user.errors.full_messages.length
+          assert_equal '所属を入力してください', @user.errors.full_messages.first
+        end
+      end
+
+      context 'when department is white spaces' do
+        test 'fails' do
+          @user.department = '  '
+
+          assert_not @user.valid?
+          assert_equal 1, @user.errors.full_messages.length
+          assert_equal '所属を入力してください', @user.errors.full_messages.first
+        end
+
+        context 'when department is valid' do
+          test 'success' do
+            @user.department = 'A111'
 
             assert @user.valid?
           end
@@ -210,6 +255,7 @@ class UserTest < ActiveSupport::TestCase
           test 'fails' do
             User.create!(first_name: 'duplicated',
                          last_name: 'duplicated',
+                         department: '本部',
                          employee_id: 'A102',
                          email: 'taro.tanaka@techouse.jp')
 

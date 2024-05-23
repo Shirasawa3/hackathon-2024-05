@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 (1..5).each do |i|
-  User.create!(id: i,first_name: "太郎#{i}号", last_name: '開発', employee_id: "D#{i}", email: "dev-#{i}@techouse.jp")
+  User.create!(id: i,first_name: "太郎#{i}号", last_name: '開発', employee_id: "D#{i}", email: "dev-#{i}@techouse.jp", department: '本部')
 end
 
 CorporateUser.create!(id: 1, first_name: '玲人', last_name: '工保', employee_id: 'C1', email: 'corporate@techouse.jp', password: 'password')
