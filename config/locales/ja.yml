@@ -76,3 +76,19 @@ ja:
         item_basic_info: 基本情報
         created_at: 作成日時
         updated_at: 更新日時
+  views:
+    corp:
+      items:
+        index:
+          title: 物品一覧
+          form:
+            s-label: 物品名
+            type-label: 種別名
+            submit: '検索'
+          table_header:
+            type: 種別
+            name: 物品名
+            stocks: 在庫数
+            total_count: 総数
+          import: インポート
+          new: 物品を追加
