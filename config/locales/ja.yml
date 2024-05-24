@@ -32,6 +32,7 @@ ja:
         middle_name: ミドルネーム
         last_name: 姓
         employee_id: 社員番号
+        department: 所属
         email: メールアドレス
         slack_channel: Slack通知チャンネル
         created_at: 作成日時

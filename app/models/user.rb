@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :middle_name, presence: true, allow_nil: true
   validates :last_name, presence: true
   validates :employee_id, presence: true, uniqueness: true
+  validates :department, presence: true
   validates :email, email_format: { message: I18n.t('errors.messages.email_format') }, presence: true, uniqueness: true
   validates :slack_channel, presence: true, allow_nil: true
 

@@ -4,7 +4,11 @@ require 'test_helper'
 
 class LentHistoryTest < ActiveSupport::TestCase
   def setup
-    user = User.create!(first_name: 'Taro', last_name: 'Tanaka', email: 'taro.tanaka@techouse.jp', employee_id: 'A101')
+    user = User.create!(first_name: 'Taro',
+                        last_name: 'Tanaka',
+                        employee_id: 'A101',
+                        department: '本部',
+                        email: 'taro.tanaka@techouse.jp')
     item = ItemBasicInfo.create!(name: 'bible', item_type: ItemType.first, count: 1)
 
     @history = LentHistory.new(user:, item_basic_info: item, lent_at: Time.current, period: 1.day.from_now)
