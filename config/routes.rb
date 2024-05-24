@@ -4,4 +4,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :corp do
+    resources :items, only: [:index, :show, :new, :create, :edit, :update]
+  end
 end

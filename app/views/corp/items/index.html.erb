@@ -1,0 +1,44 @@
+<div class="container text-center">
+  <div class="row ustify-content-between">
+    <h3 class="col"><%= I18n.t('views.corp.items.index.title') %></h3>
+    <div class="col">
+    </div>
+      <%= button_to I18n.t('views.corp.items.index.import'), '#', class: 'btn btn-primary' %>
+    <div class="col">
+    </div>
+      <%= button_to I18n.t('views.corp.items.index.new'), new_corp_item_path, method: :get, class: 'btn btn-primary' %>
+  </div>
+</div>
+<div>
+  <%= form_with(url: '/corp/items', method: 'get') do |form| %>
+    <%= form.label :s, I18n.t('views.corp.items.index.form.s-label') %>
+    <%= form.text_field :s, value: params[:s] %>
+    <%= form.label :type, I18n.t('views.corp.items.index.form.type-label') %>
+    <% types = [%w[--- 0]].concat(ItemType.order(id: :asc).map { |type| [type.name, type.id.to_s] }) %>
+    <%= form.select :type, types, selected: types.find { |v| v[1] == params[:type] } || '---' %>
+    <%= form.submit I18n.t('views.corp.items.index.form.submit'), class: 'btn btn-primary', name: nil %>
+  <% end %>
+</div>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= I18n.t('views.corp.items.index.table_header.type') %></th>
+        <th scope="col"><%= I18n.t('views.corp.items.index.table_header.name') %></th>
+        <th scope="col"><%= I18n.t('views.corp.items.index.table_header.stocks') %></th>
+        <th scope="col"><%= I18n.t('views.corp.items.index.table_header.total_count') %></th>
+      </tr>
+    </thead>
+    <% @items.each do |current| %>
+      <tr>
+        <td><%= current.item_type.name %></td>
+        <td><%= link_to current.name, corp_item_path(current.id) %></td>
+        <% total_count = current.count || current.tags.length %>
+        <td><%= total_count - current.lent_histories.in_lent.count %></td>
+        <td><%= total_count %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= paginate @items %>
+</div>
