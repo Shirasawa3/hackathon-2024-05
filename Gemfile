@@ -52,6 +52,16 @@ gem 'rails-i18n'
 # email validation
 gem 'validates_email_format_of', '~> 1.7', '>= 1.7.2'
 
+# jQuery
+gem 'jquery-rails'
+
+# Sass
+gem 'bootstrap-sass'
+gem 'sass-rails'
+
+# pagination
+gem 'kaminari'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
