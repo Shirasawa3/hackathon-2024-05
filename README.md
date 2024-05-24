@@ -59,7 +59,7 @@ rbenv install 3.2.2
 
 ### GitHubからclone
 ```zsh
-git clone git@github.com:Funny-Silkie/hackathon_2024_5_team_b.git
+git clone git@github.com:techouse-inc/hackathon_2024_5_team_b.git
 cd hackathon_2024_5_team_b
 ```
 **これ以降はリポジトリ内で作業**
