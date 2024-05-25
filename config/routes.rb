@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  scope :corp do
+    devise_for :corporate_users
+  end
+
   namespace :corp do
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
     resources :users, only: [:index, :show]
     resources :corporate_users, only: [:index]
-  end
-
-  scope :corp do
-    devise_for :corporate_users
   end
 end

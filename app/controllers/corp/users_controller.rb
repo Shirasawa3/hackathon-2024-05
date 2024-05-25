@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Corp::UsersController < ApplicationController
+class Corp::UsersController < Corp::CorporateControllerBase
   def index
     @users = User.order(id: :asc)
     if params[:s].present?

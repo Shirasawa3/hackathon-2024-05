@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Corp::ItemsController < ApplicationController
+class Corp::ItemsController < Corp::CorporateControllerBase
   def index
     @items = ItemBasicInfo.eager_load(:item_type, :lent_histories)
                           .order(created_at: :asc)

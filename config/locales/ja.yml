@@ -87,6 +87,7 @@ ja:
   views:
     corp:
       _header:
+        login: ログイン
         logout: ログアウト
       _sidebar:
         items: 物品一覧

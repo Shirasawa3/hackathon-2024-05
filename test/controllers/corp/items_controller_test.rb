@@ -3,10 +3,33 @@
 require 'test_helper'
 
 class Corp::ItemsControllerTest < ActionDispatch::IntegrationTest
+  include Warden::Test::Helpers
+
+  def setup
+    user = CorporateUser.create!(id: 1,
+                                 first_name: '太郎',
+                                 last_name: '田中',
+                                 employee_id: 'A101',
+                                 email: 'taro.tanaka@techouse.jp',
+                                 password: 'password')
+    login_as(user)
+  end
+
   describe '#index' do
     context 'as a guest' do
-      test 'returns 302 response'
-      test 'redirects to sign in page'
+      test 'returns 302 response' do
+        logout
+        get corp_items_path
+
+        assert_response :found
+      end
+
+      test 'redirects to sign in page' do
+        logout
+        get corp_items_path
+
+        assert_redirected_to new_corporate_user_session_path
+      end
     end
 
     context 'as a user' do
@@ -19,8 +42,19 @@ class Corp::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   describe '#show' do
     context 'as a guest' do
-      test 'returns 302 response'
-      test 'redirects to sign in page'
+      test 'returns 302 response' do
+        logout
+        get corp_item_path(1)
+
+        assert_response :found
+      end
+
+      test 'redirects to sign in page' do
+        logout
+        get corp_item_path(1)
+
+        assert_redirected_to new_corporate_user_session_path
+      end
     end
 
     context 'as a user' do
@@ -51,8 +85,19 @@ class Corp::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   describe '#new' do
     context 'as a guest' do
-      test 'returns 302 response'
-      test 'redirects to sign in page'
+      test 'returns 302 response' do
+        logout
+        get new_corp_item_path
+
+        assert_response :found
+      end
+
+      test 'redirects to sign in page' do
+        logout
+        get new_corp_item_path
+
+        assert_redirected_to new_corporate_user_session_path
+      end
     end
 
     context 'as a user' do
@@ -65,8 +110,19 @@ class Corp::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   describe '#edit' do
     context 'as a guest' do
-      test 'returns 302 response'
-      test 'redirects to sign in page'
+      test 'returns 302 response' do
+        logout
+        get edit_corp_item_path(1)
+
+        assert_response :found
+      end
+
+      test 'redirects to sign in page' do
+        logout
+        get edit_corp_item_path(1)
+
+        assert_redirected_to new_corporate_user_session_path
+      end
     end
 
     context 'as a user' do
@@ -97,8 +153,19 @@ class Corp::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   describe '#create' do
     context 'as a guest' do
-      test 'returns 302 response'
-      test 'redirects to sign in page'
+      test 'returns 302 response' do
+        logout
+        post corp_items_path
+
+        assert_response :found
+      end
+
+      test 'redirects to sign in page' do
+        logout
+        post corp_items_path
+
+        assert_redirected_to new_corporate_user_session_path
+      end
     end
 
     context 'as a user' do
@@ -128,8 +195,19 @@ class Corp::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   describe '#update' do
     context 'as a guest' do
-      test 'returns 302 response'
-      test 'redirects to sign in page'
+      test 'returns 302 response' do
+        logout
+        patch corp_item_path(1)
+
+        assert_response :found
+      end
+
+      test 'redirects to sign in page' do
+        logout
+        patch corp_item_path(1)
+
+        assert_redirected_to new_corporate_user_session_path
+      end
     end
 
     context 'as a user' do

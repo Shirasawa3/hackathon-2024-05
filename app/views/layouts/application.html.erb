@@ -18,7 +18,9 @@
     <div class="container">
       <div class="row flex justify-content-start">
         <div class="col-md-5">
-          <%= render 'layouts/corp/sidebar' %>
+          <% if current_corporate_user %>
+            <%= render 'layouts/corp/sidebar' %>
+          <% end %>
         </div>
         <div class="col-md-10">
           <%= yield %>
