@@ -14,10 +14,6 @@ Rails.application.routes.draw do
     resources :corporate_users, only: [:index]
   end
 
-  scope :corp do
-    devise_for :corporate_users
-  end
-
   root "users#show"
 
   get    "/users/sign_in",  to: "users/sessions#new"
