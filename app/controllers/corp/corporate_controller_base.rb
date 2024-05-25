@@ -6,9 +6,6 @@ class Corp::CorporateControllerBase < ApplicationController
   private
 
   def redirect_if_guest
-    unless current_corporate_user
-      session[:previous_url] = request.fullpath
-      redirect_to new_corporate_user_session_path
-    end
+    redirect_to new_corporate_user_session_path unless current_corporate_user
   end
 end
