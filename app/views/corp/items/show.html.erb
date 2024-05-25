@@ -1,12 +1,13 @@
+<div class="text-center">
+  <h2><%= I18n.t('views.corp.items.show.title') %></h2>
+</div>
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-md-7"></div>
+    <div class="col-md-1">
       <%= button_to I18n.t('views.corp.items.show.button-return'), corp_items_path, method: :get, class: 'btn btn-primary' %>
     </div>
-    <div class="col">
-      <h3><%= I18n.t('views.corp.items.show.title') %></h3>
-    </div>
-    <div class="col">
+    <div class="col-md-1">
       <%= button_to I18n.t('views.corp.items.show.button-edit'), edit_corp_item_path(@item.id), method: :get, class: 'btn btn-primary' %>
     </div>
   </div>
