@@ -26,5 +26,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  get "/items",             to: "items#index"
+  get    "/items",          to: "items#index"
+
+  resources :lendings, only: [:new, :create, :edit, :update]
+
 end
