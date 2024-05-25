@@ -5,7 +5,11 @@
     </h2>
       <ul class="nav navbar-nav navbar-right">
         <li style="padding-right: 30px"><h4>ユーザー：<%= current_corporate_user&.full_name %></h4></li>
-        <li><%= button_to I18n.t('views.corp._header.logout'), '#', method: :post, class: 'btn btn-primary' %></li>
+        <% if current_corporate_user %>
+          <li><%= button_to I18n.t('views.corp._header.logout'), destroy_corporate_user_session_path, method: :delete, class: 'btn btn-primary' %></li>
+        <% else %>
+          <li><%= button_to I18n.t('views.corp._header.login'), new_corporate_user_session_path, method: :get, class: 'btn btn-primary' %></li>
+        <% end %>
       </ul>
   </div>
 </header>
