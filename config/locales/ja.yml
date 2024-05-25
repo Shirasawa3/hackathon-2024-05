@@ -169,3 +169,7 @@ ja:
       status: 貸出状況
       extension: 延長する
       return: 返却する
+    items:
+      stocks: 在庫数
+      total_count: 総数
+      lent_button: 借りるボタン
