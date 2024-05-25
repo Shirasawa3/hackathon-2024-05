@@ -84,6 +84,12 @@ ja:
         not_found: "物品%{id}のレコードが見つかりませんでした"
   views:
     corp:
+      _header:
+        logout: ログアウト
+      _sidebar:
+        items: 物品一覧
+        users: 社員一覧
+        corp_users: コーポレート一覧
       items:
         index:
           title: 物品一覧

@@ -1,0 +1,12 @@
+<header>
+  <div class="container">
+    <h2>
+      <%= link_to "物品貸出ページ/コーポレート用", corp_items_path %>
+    </h2>
+      <ul class="nav navbar-nav navbar-right">
+        <li style="padding-right: 30px"><h4>ユーザー：<%= current_corporate_user&.full_name %></h4></li>
+        <li><%= button_to I18n.t('views.corp._header.logout'), '#', method: :post, class: 'btn btn-primary' %></li>
+      </ul>
+    </div>
+  </div>
+</header>

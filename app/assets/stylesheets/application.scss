@@ -1,2 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.flex {
+  display: flex;
+  flex-wrap: nowrap;
+}
