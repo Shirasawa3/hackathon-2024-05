@@ -153,3 +153,14 @@ ja:
             title: 貸出履歴
             no_returned: 未返却
             none: なし
+      corporate_users:
+        index:
+          title: 社員一覧
+          import: インポート
+          form:
+            s-label: 氏名
+            submit: 検索
+          table_header:
+            name: 氏名
+            employee_id: 社員番号
+            email: メールアドレス
