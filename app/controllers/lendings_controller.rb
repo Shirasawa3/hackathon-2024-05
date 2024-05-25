@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-class LendingsController < ApplicationController
-  include Users::SessionsHelper
+class LendingsController < UserControllerBase
   before_action :now_item
-  before_action :logged_in_user
-  before_action :correct_user
 
   def new; end
 
@@ -29,20 +26,6 @@ class LendingsController < ApplicationController
   def update; end
 
   private
-
-  # ログイン済みユーザーかどうか確認
-  def logged_in_user
-    return if user_logged_in?
-
-    flash[:danger] = 'Please log in.' # rubocop: disable Rails
-    redirect_to users_sign_in_url, status: :see_other
-  end
-
-  # 正しいユーザーかどうか確認
-  def correct_user
-    @user = User.find(session[:user_id])
-    redirect_to(root_url, status: :see_other) unless @user == current_user
-  end
 
   def now_item
     @item = ItemBasicInfo.find_by(id: params[:item_id])

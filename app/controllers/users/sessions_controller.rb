@@ -8,7 +8,7 @@ class Users::SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user
       reset_session
-      user_log_in user
+      log_in user
       redirect_to user
     else
       flash.now[:danger] = 'Invalid email/password combination' # rubocop:disable Rails/I18nLocaleTexts
@@ -17,7 +17,7 @@ class Users::SessionsController < ApplicationController
   end
 
   def destroy
-    user_log_out
+    log_out
     redirect_to users_sign_in_url, status: :see_other
   end
 end
