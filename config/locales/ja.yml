@@ -81,7 +81,9 @@ ja:
   flash:
     corp:
       items:
-        not_found: "物品%{id}のレコードが見つかりませんでした"
+        not_found: "物品ID%{id}のレコードが見つかりませんでした"
+      users:
+        not_found: "ユーザーID%{id}のレコードが見つかりませんでした"
   views:
     corp:
       _header:
@@ -126,3 +128,28 @@ ja:
           count_type_tag: タグあり
           submit_new: 登録
           submit_edit: 更新
+      users:
+        index:
+          title: 社員一覧
+          import: インポート
+          form:
+            s-label: 氏名
+            submit: 検索
+          table_header:
+            name: 氏名
+            employee_id: 社員番号
+            department: 所属
+            email: メールアドレス
+        show:
+          title: 社員詳細
+          button-return: 戻る
+          basic-info:
+            title: 基本情報
+            header:
+              key: カラム名
+              value: 値
+            id: ユーザーID
+          histories:
+            title: 貸出履歴
+            no_returned: 未返却
+            none: なし

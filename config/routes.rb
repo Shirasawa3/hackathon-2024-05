@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   namespace :corp do
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
+    resources :users, only: [:index, :show]
   end
 end

@@ -1,0 +1,42 @@
+<div>
+  <% flash.each do |type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{type}") %>
+  <% end %>
+</div>
+<div class="container">
+  <div class="row justify-content-between">
+    <h3 class="col-md-8"><%= I18n.t('views.corp.users.index.title') %></h3>
+    <div class="col-md-1" style="padding-top: 25px">
+      <%= button_to I18n.t('views.corp.users.index.import'), '#', class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+<div>
+  <%= form_with(url: '/corp/users', method: 'get') do |form| %>
+    <%= form.label :s, I18n.t('views.corp.users.index.form.s-label') %>
+    <%= form.text_field :s, value: params[:s] %>
+    <%= form.submit I18n.t('views.corp.users.index.form.submit'), class: 'btn btn-primary', name: nil %>
+  <% end %>
+</div>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= I18n.t('views.corp.users.index.table_header.name') %></th>
+        <th scope="col"><%= I18n.t('views.corp.users.index.table_header.employee_id') %></th>
+        <th scope="col"><%= I18n.t('views.corp.users.index.table_header.department') %></th>
+        <th scope="col"><%= I18n.t('views.corp.users.index.table_header.email') %></th>
+      </tr>
+    </thead>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.full_name, corp_user_path(user.id) %></td>
+        <td><%= user.employee_id %></td>
+        <td><%= user.department %></td>
+        <td><%= user.email %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= paginate @users %>
+</div>
