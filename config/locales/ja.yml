@@ -99,7 +99,7 @@ ja:
           form:
             s-label: 物品名
             type-label: 種別名
-            submit: '検索'
+            submit: "検索"
           table_header:
             type: 種別
             name: 物品名
@@ -165,3 +165,7 @@ ja:
             name: 氏名
             employee_id: 社員番号
             email: メールアドレス
+    users:
+      status: 貸出状況
+      extension: 延長する
+      return: 返却する
