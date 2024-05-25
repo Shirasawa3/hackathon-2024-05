@@ -1,4 +1,7 @@
 ja:
+  success:
+    messages:
+      lend: レンタルしました
   errors:
     messages:
       email_format: は不正な値です
@@ -173,4 +176,9 @@ ja:
       stocks: 在庫数
       total_count: 総数
       lent_button: 借りるボタン
-      lent: 借りる
+      lend: 借りる
+    lendings:
+      button-return: 戻る
+      lend: 借りる
+      period: 返却予定日
+      tag: タグ
