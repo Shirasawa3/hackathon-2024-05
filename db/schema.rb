@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_23_143154) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_25_063557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,7 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_23_143154) do
 
   create_table "item_basic_infos", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "max_lent_period"
     t.bigint "item_type_id", null: false
     t.integer "count"
     t.string "tags", array: true
@@ -56,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_23_143154) do
     t.boolean "is_extendable", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.interval "max_lent_period"
     t.index ["item_type_id"], name: "index_item_basic_infos_on_item_type_id"
     t.index ["name", "item_type_id"], name: "index_item_basic_infos_on_name_and_item_type_id", unique: true
   end

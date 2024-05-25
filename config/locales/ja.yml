@@ -22,6 +22,7 @@ ja:
         first_name: 名
         middle_name: ミドルネーム
         last_name: 姓
+        name: コーポレートユーザー名
         employee_id: 社員番号
         email: メールアドレス
         created_at: 作成日時
@@ -31,6 +32,7 @@ ja:
         first_name: 名
         middle_name: ミドルネーム
         last_name: 姓
+        name: ユーザー名
         employee_id: 社員番号
         department: 所属
         email: メールアドレス
@@ -76,6 +78,10 @@ ja:
         item_basic_info: 基本情報
         created_at: 作成日時
         updated_at: 更新日時
+  flash:
+    corp:
+      items:
+        not_found: "物品%{id}のレコードが見つかりませんでした"
   views:
     corp:
       items:
@@ -92,3 +98,25 @@ ja:
             total_count: 総数
           import: インポート
           new: 物品を追加
+        show:
+          button-return: 戻る
+          title: 物品詳細
+          button-edit: 編集する
+          basic-info:
+            title: 基本情報
+            header:
+              key: カラム名
+              value: 値
+            stocks: 在庫数
+            total_count: 総数
+            tags: 全タグ
+            none: なし
+          histories:
+            title: 貸出履歴
+            none: なし
+            no_returned: 未返却
+        _form:
+          count_type_count: タグ管理なし
+          count_type_tag: タグあり
+          submit_new: 登録
+          submit_edit: 更新

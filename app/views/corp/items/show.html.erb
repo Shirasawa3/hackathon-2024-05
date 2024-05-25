@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= button_to I18n.t('views.corp.items.show.button-return'), corp_items_path, method: :get, class: 'btn btn-primary' %>
+    </div>
+    <div class="col">
+      <h3><%= I18n.t('views.corp.items.show.title') %></h3>
+    </div>
+    <div class="col">
+      <%= button_to I18n.t('views.corp.items.show.button-edit'), edit_corp_item_path(@item.id), method: :get, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+
+<h3><%= I18n.t('views.corp.items.show.basic-info.title') %></h3>
+<table class="table">
+  <tr>
+    <th><%= I18n.t('views.corp.items.show.basic-info.header.key') %></th>
+    <th><%= I18n.t('views.corp.items.show.basic-info.header.value') %></th>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.id') %></td>
+    <td><%= @item.id %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.item_type') %></td>
+    <td><%= @item.item_type.name %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.name') %></td>
+    <td><%= @item.name %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.max_lent_period') %></td>
+    <td><%= @item.max_lent_period_as_string || I18n.t('views.corp.items.show.basic-info.none') %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.is_extendable') %></td>
+    <td><%= @item.is_extendable %></td>
+  </tr>
+  <% total_count = @item.count || @item.tags.length %>
+  <tr>
+    <td><%= I18n.t('views.corp.items.show.basic-info.stocks') %></td>
+    <td><%= total_count - @item.lent_histories.in_lent.count %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('views.corp.items.show.basic-info.total_count') %></td>
+    <td><%= total_count %></td>
+  </tr>
+  <% if @item.tags %>
+    <tr>
+      <td><%= I18n.t('views.corp.items.show.basic-info.tags') %></td>
+      <td>
+        <% @item.tags.each do |tag| %>
+          <div><%= tag %></div>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<h3><%= I18n.t('views.corp.items.show.histories.title') %></h3>
+<% if @item.lent_histories.any? %>
+  <table class="table">
+    <tr>
+      <th><%= I18n.t('activerecord.attributes.lent_history.user_id') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.user') %></th>
+      <% if @item.tags %>
+        <th><%= I18n.t('activerecord.attributes.lent_history.tag') %></th>
+      <% end %>
+      <th><%= I18n.t('activerecord.attributes.lent_history.lent_at') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.period') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.returned_at') %></th>
+    </tr>
+    <% @item.lent_histories.order(created_at: :desc).each do |history| %>
+      <tr>
+        <td><%= history.user_id %></td>
+        <td><%= history.user.full_name %></td>
+        <% if @item.tags %>
+          <td><%= history.tag %></td>
+        <% end %>
+        <td><%= history.lent_at %></td>
+        <td><%= history.period %></td>
+        <td><%= history.returned_at || I18n.t('views.corp.items.show.histories.no_returned') %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <b><%= I18n.t('views.corp.items.show.histories.none') %></b>
+<% end %>

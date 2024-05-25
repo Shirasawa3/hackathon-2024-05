@@ -1,3 +1,8 @@
+<div>
+  <% flash.each do |type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{type}") %>
+  <% end %>
+</div>
 <div class="container text-center">
   <div class="row ustify-content-between">
     <h3 class="col"><%= I18n.t('views.corp.items.index.title') %></h3>

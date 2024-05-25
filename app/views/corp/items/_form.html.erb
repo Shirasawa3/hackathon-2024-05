@@ -1,0 +1,85 @@
+<% if is_edit %>
+  <% target_url = "/corp/items/#{@item.id}" %>
+  <% method = :patch %>
+<% else %>
+  <% target_url = '/corp/items' %>
+  <% method = :post %>
+<% end %>
+
+<%= form_with(url: target_url, scope: 'item', method:) do |form| %>
+  <% if @item.errors.any? %>
+    <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= form.label :name, I18n.t('activerecord.attributes.item_basic_info.name') %>
+    <%= form.text_field :name, value: @item.name, disabled: is_edit %>
+  </div>
+  <div>
+    <%= form.label :item_type_id, I18n.t('activerecord.attributes.item_basic_info.item_type') %>
+    <%= form.select :item_type_id, ItemType.all.map { |type| [type.name, type.id.to_s] }, selected: @item.item_type_id %>
+  </div>
+  <div>
+    <%= form.label :status, I18n.t('activerecord.attributes.item_basic_info.status') %>
+    <%= form.select :status, ItemBasicInfo.statuses, {}, { selected: @item.status } %>
+  </div>
+  <div>
+    <%= form.radio_button :count_type, :count %>
+    <%= form.label :count_type_count, I18n.t('views.corp.items._form.count_type_count') %>
+  </div>
+  <div>
+    <%= form.label :count, I18n.t('activerecord.attributes.item_basic_info.count') %>
+    <%= form.number_field :count, min: 0, value: @item.count || 1 %>
+  </div>
+  <div>
+    <%= form.radio_button :count_type, :tags %>
+    <%= form.label :count_type_tags, I18n.t('views.corp.items._form.count_type_tag') %>
+  </div>
+  <div>
+    <%= form.label :tags, I18n.t('activerecord.attributes.item_basic_info.tags') %>
+    <%= form.text_area :tags, value: @item.tags&.join("\n") %>
+  </div>
+  <div>
+    <%= form.label :max_lent_period, I18n.t('activerecord.attributes.item_basic_info.max_lent_period') %>
+    <%= form.text_field :max_lent_period, value: @item.max_lent_period_as_string, placeholder: 'YYYY/MM/DD', pattern: /\d{1,4}\/(0?[0-9]|1[0-2])\/([0-2]?[0-9]|3[01])/ %>
+  </div>
+  <div>
+    <%= form.label :is_extendable, I18n.t('activerecord.attributes.item_basic_info.is_extendable') %>
+    <%= form.check_box :is_extendable, checked: @item.is_extendable %>
+  </div>
+  <%= form.submit (is_edit ? I18n.t('views.corp.items._form.submit_edit') : I18n.t('views.corp.items._form.submit_new')), class: 'btn btn-primary', name: nil %>
+<% end %>
+
+<script>
+  const radioAsCount = document.getElementById('item_count_type_count');
+  const radioAsTags = document.getElementById('item_count_type_tags');
+  const inputCount = document.getElementById('item_count');
+  const inputTags = document.getElementById('item_tags');
+
+  radioAsCount.addEventListener('change', () => {
+      refleshEnabledStatus();
+  });
+  radioAsTags.addEventListener('change', () => {
+      refleshEnabledStatus();
+  });
+
+  function refleshEnabledStatus() {
+      inputCount.disabled = !radioAsCount.checked;
+      inputTags.disabled = !radioAsTags.checked;
+  }
+
+  function initForm() {
+      let hasCount = <%= !!@item.count %>;
+      if (hasCount) {
+          radioAsCount.checked = true;
+      }
+      else {
+          radioAsTags.checked = true;
+      }
+      refleshEnabledStatus();
+  }
+  initForm();
+</script>

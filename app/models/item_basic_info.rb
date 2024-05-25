@@ -6,7 +6,7 @@ class ItemBasicInfo < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :item_type_id }
   validate :count_and_tags_are_exclusive, :tags_cannot_have_empty, :tags_must_be_unique
-  validates :count, numericality: { greater_than_or_equal_to: 1 }, allow_nil: true
+  validates :count, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   enum status: {
     available: 0,
@@ -25,6 +25,25 @@ class ItemBasicInfo < ApplicationRecord
   # @return [true, false]
   def has_tags? # rubocop:disable Naming/PredicateName
     !tags.nil?
+  end
+
+  # YYYY/MM/DD 形式の文字列を max_lent_period 用の値に変換する
+  # @value [String] YYYY/MM/DD 形式の文字列
+  # @return [ActiveSupport::Duration]
+  def self.convert_max_lent_period(value)
+    duration_string = value.gsub(%r{(\d{1,4})/(0?[0-9]|1[0-2])/([0-2]?[0-9]|3[01])}, 'P\1Y\2M\3D')
+    ActiveSupport::Duration.parse(duration_string)
+  end
+
+  def max_lent_period_as_string
+    return nil unless max_lent_period
+
+    days_raw = max_lent_period.to_i
+    years = days_raw / 31_556_952
+    monthes = (days_raw % 31_556_952) / 2_629_746
+    days = (days_raw % 2_629_746) / 86_400
+
+    "#{years}/#{monthes}/#{days}"
   end
 
   private

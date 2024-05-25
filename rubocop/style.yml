@@ -33,3 +33,7 @@ Style/RescueStandardError:
 # ENV.fetch でブロック使用を許可
 Style/RedundantFetchBlock:
   Enabled: false
+
+# ガード節の強制を解除
+Style/GuardClause:
+  Enabled: false
