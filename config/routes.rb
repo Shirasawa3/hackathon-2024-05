@@ -13,4 +13,15 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :corporate_users, only: [:index]
   end
+
+  root "users#show"
+
+  get    "/users/sign_in",  to: "users/sessions#new"
+  post   "/users/sign_in",  to: "users/sessions#create"
+  delete "/users/sign_out", to: "users/sessions#destroy"
+
+  resources :users, only: [:show]
+  resources :items, only: [:index]
+  resources :lendings, only: [:new, :create, :edit, :update]
+
 end

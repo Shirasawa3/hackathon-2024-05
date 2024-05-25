@@ -1,0 +1,47 @@
+<div class="col">
+      <%= button_to I18n.t('views.lendings.button-return'), items_path, method: :get, class: 'btn btn-primary' %>
+</div>
+
+<div>
+    <h1>借りる</h1>
+</div>
+
+<table class="table">
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.name') %></td>
+    <td><%= @item.name %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.max_lent_period') %></td>
+    <td><%= @item.max_lent_period_as_string || I18n.t('views.corp.items.show.basic-info.none') %></td>
+  </tr>
+  <% total_count = @item.count || @item.tags.length %>
+  <tr>
+    <td><%= I18n.t('views.corp.items.show.basic-info.stocks') %></td>
+    <td><%= total_count - @item.lent_histories.in_lent.count %></td>
+  </tr>
+</table>
+
+<div>
+  <% if @item.tags %>
+    <%= form_with url: lendings_path, method: 'post' do |form| %>
+      <%= hidden_field_tag :item_id, @item.id %> 
+      <%= form.label :tag, I18n.t('views.lendings.tag') %>
+      <% types = [%w[--- 0]].concat(ItemType.order(id: :asc).map { |type| [type.name, type.id.to_s] }) %>
+      <%= form.select :tag, types, selected: types.find { |v| v[1] == params[:tag] } || '---' %>
+      <%= form.label :period, I18n.t('views.lendings.period') %>
+      <%= form.date_field :period %>
+      <%= form.submit I18n.t('views.lendings.lend'), class: 'btn btn-primary', name: nil %>
+    <% end %>
+  <% else %>
+    <%= form_with url: lendings_path, method: 'post' do |form| %>
+      <%= hidden_field_tag :item_id, @item.id %>
+      <%= form.label :period, I18n.t('views.lendings.period') %>
+      <%= form.date_field :period %>
+      <%= form.submit I18n.t('views.lendings.lend'), class: 'btn btn-primary', name: nil %>
+    <% end %>
+  <% end %>
+
+
+</div>
+
