@@ -117,27 +117,27 @@ class ItemBasicInfoTest < ActiveSupport::TestCase
     end
 
     describe 'count' do
-      context 'when count is less than 1' do
+      context 'when count is less than 0' do
         test 'fails' do
           @info.count = -1
 
           assert_not @info.valid?
           assert_equal 1, @info.errors.full_messages.length
-          assert_equal '会社所有数は1以上の値にしてください', @info.errors.full_messages.first
+          assert_equal '会社所有数は0以上の値にしてください', @info.errors.full_messages.first
         end
       end
 
-      context 'when count is equals to 1' do
+      context 'when count is equals to 0' do
         test 'success' do
-          @info.count = 1
+          @info.count = 0
 
           assert @info.valid?
         end
       end
 
-      context 'when count is greater than 1' do
+      context 'when count is greater than 0' do
         test 'success' do
-          @info.count = 2
+          @info.count = 1
 
           assert @info.valid?
         end
@@ -178,6 +178,14 @@ class ItemBasicInfoTest < ActiveSupport::TestCase
     end
   end
 
+  describe '.convert_max_lent_period' do
+    test 'returns converted duration' do
+      result = ItemBasicInfo.convert_max_lent_period('1/2/3')
+
+      assert ActiveSupport::Duration.parse('P1Y2M3D'), result
+    end
+  end
+
   describe '#has_count?' do
     context 'when count is nil' do
       test 'returns false' do
@@ -210,6 +218,24 @@ class ItemBasicInfoTest < ActiveSupport::TestCase
         @info.tags = %w[a]
 
         assert @info.has_tags?
+      end
+    end
+  end
+
+  describe '#max_lent_period_as_string' do
+    context 'whem max_lent_period is nil' do
+      test 'returns nil' do
+        @info.max_lent_period = nil
+
+        assert_nil @info.max_lent_period_as_string
+      end
+    end
+
+    context 'when max_lent_period is not nil' do
+      test 'returns string' do
+        @info.max_lent_period = ActiveSupport::Duration.parse('P1Y2M3D')
+
+        assert_equal '1/2/3', @info.max_lent_period_as_string
       end
     end
   end

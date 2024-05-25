@@ -10,14 +10,62 @@ class Corp::ItemsController < ApplicationController
   end
 
   def show
-    @item = ItemBasicInfo.find(params[:id])
+    @item = ItemBasicInfo.find_by(id: params[:id])
+
+    unless @item
+      flash[:danger] = I18n.t('flash.corp.items.not_found', id: params[:id])
+      redirect_to corp_items_path
+    end
   end
 
-  def new; end
+  def new
+    @item = ItemBasicInfo.new(count: 0)
+  end
 
-  def edit; end
+  def edit
+    @item = ItemBasicInfo.find_by(id: params[:id])
 
-  def create; end
+    unless @item
+      flash[:danger] = I18n.t('flash.corp.items.not_found', id: params[:id])
+      redirect_to corp_items_path
+    end
+  end
 
-  def update; end
+  def create
+    @item = ItemBasicInfo.new(item_params)
+    unless @item.save
+      render 'new', status: :unprocessable_entity
+      return
+    end
+
+    redirect_to corp_items_path
+  end
+
+  def update
+    @item = ItemBasicInfo.find(params[:id])
+    @item.count = @item.tags = nil
+    @item.assign_attributes(item_params)
+    unless @item.save
+      render 'edit', status: :unprocessable_entity
+      return
+    end
+
+    redirect_to corp_items_path(@item.id)
+  end
+
+  private
+
+  # Strong Parameter を生成する
+  # @return [ActionController::Parameters]
+  def item_params
+    result = params.require(:item)
+                   .permit(:name, :item_type_id, :status, :count_type, :count, :tags, :max_lent_period, :is_extendable)
+    result.delete(:count_type)
+    result[:status] = result[:status].to_i
+    result[:tags] = result[:tags].split("\n").filter(&:present?) if result[:tags]
+    if result[:max_lent_period]
+      result[:max_lent_period] = ItemBasicInfo.convert_max_lent_period(result[:max_lent_period])
+    end
+    result
+  end
 end
