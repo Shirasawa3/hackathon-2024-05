@@ -25,5 +25,4 @@ class Corp::CorporateUsersControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
-
 end
