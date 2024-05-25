@@ -1,0 +1,65 @@
+<div class="text-center">
+  <h2><%= I18n.t('views.corp.users.show.title') %></h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-1">
+      <%= button_to I18n.t('views.corp.users.show.button-return'), corp_users_path, method: :get, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+
+<h3><%= I18n.t('views.corp.users.show.basic-info.title') %></h3>
+<table class="table">
+  <tr>
+    <th><%= I18n.t('views.corp.users.show.basic-info.header.key') %></th>
+    <th><%= I18n.t('views.corp.users.show.basic-info.header.value') %></th>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.user.id') %></td>
+    <td><%= @user.id %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.user.employee_id') %></td>
+    <td><%= @user.employee_id %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.user.name') %></td>
+    <td><%= @user.full_name %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.user.department') %></td>
+    <td><%= @user.department %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.user.email') %></td>
+    <td><%= @user.email %></td>
+  </tr>
+</table>
+
+<h3><%= I18n.t('views.corp.users.show.histories.title') %></h3>
+<% if @user.lent_histories.any? %>
+  <table class="table">
+    <tr>
+      <th><%= I18n.t('activerecord.attributes.lent_history.item_basic_info_id') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.item_basic_info') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.tag') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.lent_at') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.period') %></th>
+      <th><%= I18n.t('activerecord.attributes.lent_history.returned_at') %></th>
+    </tr>
+    <% @user.lent_histories.order(created_at: :desc).each do |history| %>
+      <tr>
+        <td><%= history.item_basic_info_id %></td>
+        <td><%= history.item_basic_info.name %></td>
+        <td><%= history.tag %></td>
+        <td><%= history.lent_at %></td>
+        <td><%= history.period %></td>
+        <td><%= history.returned_at || I18n.t('views.corp.users.show.histories.no_returned') %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <b><%= I18n.t('views.corp.users.show.histories.none') %></b>
+<% end %>
