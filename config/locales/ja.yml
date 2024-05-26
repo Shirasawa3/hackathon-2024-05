@@ -176,6 +176,11 @@ ja:
       status: 貸出状況
       extension: 延長する
       return: 返却する
+      button-extension: 延長
+      button-return: 返却
+      _sidebar:
+        history: あなたの貸出状況
+        items: レンタルする
     items:
       stocks: 在庫数
       total_count: 総数
@@ -183,6 +188,7 @@ ja:
       lend: 借りる
     lendings:
       button-return: 戻る
+      button-extension: 延長する
       lend: 借りる
       period: 返却予定日
       tag: タグ

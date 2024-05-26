@@ -1,0 +1,15 @@
+<header>
+  <div class="container">
+    <h3>
+      <%= link_to "物品貸出", '/' %>
+    </h3>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user = User.find_by(id: session[:user_id]) %>
+          <li style="padding-right: 30px"><h4>ユーザー：<%= user&.full_name %></h4></li>
+          <li><%= button_to I18n.t('views.corp._header.logout'), users_sign_out_path, method: :delete, class: 'btn btn-primary' %></li>
+        <% else %>
+          <li><%= button_to I18n.t('views.corp._header.login'), users_sign_in_path, method: :get, class: 'btn btn-primary' %></li>
+        <% end %>
+      </ul>
+  </div>
+</header>

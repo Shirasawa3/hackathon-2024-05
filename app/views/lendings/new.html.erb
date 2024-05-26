@@ -24,11 +24,14 @@
 
 <div>
   <% if @item.tags %>
+    <% lent_histories_with_tags = @item.lent_histories.in_lent %>
+    <% now_lent_tags = lent_histories_with_tags.pluck(:tag) %>
+    <% item_tags = @item.tags - now_lent_tags %>
     <%= form_with url: lendings_path, method: 'post' do |form| %>
       <%= hidden_field_tag :item_id, @item.id %> 
       <%= form.label :tag, I18n.t('views.lendings.tag') %>
-      <% types = [%w[--- 0]].concat(ItemType.order(id: :asc).map { |type| [type.name, type.id.to_s] }) %>
-      <%= form.select :tag, types, selected: types.find { |v| v[1] == params[:tag] } || '---' %>
+      <% types = item_tags.map { |type| [type, type] } %>
+      <%= form.select :tag, types, include_blank: "選択して下さい" %>
       <%= form.label :period, I18n.t('views.lendings.period') %>
       <%= form.date_field :period %>
       <%= form.submit I18n.t('views.lendings.lend'), class: 'btn btn-primary', name: nil %>

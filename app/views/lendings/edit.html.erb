@@ -1,0 +1,37 @@
+<div class="col">
+      <%= button_to I18n.t('views.lendings.button-return'), root_path, method: :get, class: 'btn btn-primary' %>
+</div>
+
+<div>
+    <h1>延長する</h1>
+</div>
+
+<table class="table">
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.name') %></td>
+    <td><%= @lent_history.item_basic_info.name %></td>
+  </tr>
+  <% if @lent_history.tag %>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.lent_history.tag') %></td>
+    <td><%= @lent_history.tag %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td><%= I18n.t('views.lendings.period') %></td>
+    <td><%= @lent_history.period %></td>
+  </tr>
+  <tr>
+    <td><%= I18n.t('activerecord.attributes.item_basic_info.max_lent_period') %></td>
+    <td><%= @lent_history.item_basic_info.max_lent_period_as_string || I18n.t('views.corp.items.show.basic-info.none') %></td>
+  </tr>
+</table>
+
+<div>
+  <%= form_with url: lending_path(@lent_history), method: 'patch' do |form| %>
+    <%= form.label :period, I18n.t('views.lendings.period') %>
+    <%= form.date_field :period %>
+    <%= form.submit I18n.t('views.lendings.button-extension'), class: 'btn btn-primary', name: nil %>
+  <% end %>
+</div>
+

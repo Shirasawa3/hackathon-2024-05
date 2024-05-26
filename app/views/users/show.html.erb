@@ -3,9 +3,10 @@
 </div>
 
 <div>
-  <%= form_with(model: @user, url: user_path(@user), method: 'get') do |form| %>
-    <%= form.label :type, I18n.t('views.users.status') %>
-
+  <%= form_with(url: user_path(@user), method: 'get') do |form| %>
+    <%= form.label :lent_status, I18n.t('views.users.status') %>
+    <% types = [["貸出中", 1], ["返却済み", 2]] %>
+    <%= form.select :lent_status, types, include_blank: "選択して下さい", selected: params[:lent_status] %>
     <%= form.submit I18n.t('views.corp.items.index.form.submit'), class: 'btn btn-primary', name: nil %>
   <% end %>
 </div>
@@ -29,11 +30,15 @@
         <td><%= current.item_basic_info.item_type.name %></td>
         <td><%= current.item_basic_info.name %></td>
         <td><%= current.tag %></td>
-        <td><%= current.lent_at %></td>
-        <td><%= current.period %></td>
-        <td><%= current.returned_at %></td>
-        <td><%= current.returned_at %></td>
-        <td><%= current.returned_at %></td>
+        <td><%= current.lent_at.strftime("%F") %></td>
+        <td><%= current.period.strftime("%F") %></td>
+        <td><%= current.returned_at.present? ? current.returned_at.strftime("%F") : '' %></td>
+        <% if !current.returned_at and current.item_basic_info.is_extendable %>
+        <td><%= button_to I18n.t('views.users.button-extension'), edit_lending_path(current), method: :get %></td>
+        <% end %>
+        <% if !current.returned_at %>
+        <td><%= button_to I18n.t('views.users.button-return'), lending_path(current), params: {returned_at: Time.current}, method: :patch %></td>
+        <% end %>
       </tr>
     <% end %>
   </table>
