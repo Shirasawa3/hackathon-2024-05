@@ -1,13 +1,8 @@
-<div>
-  <% flash.each do |type, message| %>
-    <%= content_tag(:div, message, class: "alert alert-#{type}") %>
-  <% end %>
-</div>
 <div class="container">
   <div class="row justify-content-between">
     <h3 class="col-md-7"><%= I18n.t('views.corp.items.index.title') %></h3>
     <div class="col-md-1" style="padding-top: 25px">
-      <%= button_to I18n.t('views.corp.items.index.import'), '#', class: 'btn btn-primary' %>
+      <%= button_to I18n.t('views.corp.items.index.import'), new_corp_items_upload_path, method: :get, class: 'btn btn-primary' %>
     </div>
     <div class="col-md-1" style="padding-top: 25px; padding-left: 50px">
       <%= button_to I18n.t('views.corp.items.index.new'), new_corp_item_path, method: :get, class: 'btn btn-primary' %>

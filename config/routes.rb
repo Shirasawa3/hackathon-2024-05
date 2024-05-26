@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show, :new, :create, :edit, :update]
     resources :users, only: [:index, :show]
     resources :corporate_users, only: [:index]
+    namespace :items do
+      resources :uploads, only: [:new, :create]
+    end
   end
 
   root "users#show"
@@ -23,5 +26,4 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :items, only: [:index]
   resources :lendings, only: [:new, :create, :edit, :update]
-
 end

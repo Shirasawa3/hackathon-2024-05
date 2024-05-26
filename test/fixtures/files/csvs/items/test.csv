@@ -1,0 +1,4 @@
+type,name,count,tags,max_lent_period,is_extendable,status
+書籍,ドグラ・マグラ,10,,0/1/0,false,available
+ヘッドセット,型番T,,TEC-T001;TEC-T002;TEC-T003,,true,available
+書籍,禁書,1,,1/0/0,false,hidden

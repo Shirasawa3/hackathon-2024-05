@@ -37,3 +37,7 @@ Style/RedundantFetchBlock:
 # ガード節の強制を解除
 Style/GuardClause:
   Enabled: false
+
+# positive? nagative? 強制の解除
+Style/NumericPredicate:
+  Enabled: false

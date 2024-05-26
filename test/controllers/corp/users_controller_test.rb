@@ -5,7 +5,7 @@ require 'test_helper'
 class Corp::UsersControllerTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
-  def setup # rubocop:disable Metrics/MethodLength
+  def setup
     corp_user = CorporateUser.create!(id: 1,
                                       first_name: '太郎',
                                       last_name: '田中',

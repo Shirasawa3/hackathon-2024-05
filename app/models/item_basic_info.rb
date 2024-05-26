@@ -28,9 +28,11 @@ class ItemBasicInfo < ApplicationRecord
   end
 
   # YYYY/MM/DD 形式の文字列を max_lent_period 用の値に変換する
-  # @value [String] YYYY/MM/DD 形式の文字列
-  # @return [ActiveSupport::Duration]
+  # @value [String, nil] YYYY/MM/DD 形式の文字列
+  # @return [ActiveSupport::Duration, nil]
   def self.convert_max_lent_period(value)
+    return nil if value.blank?
+
     duration_string = value.gsub(%r{(\d{1,4})/(0?[0-9]|1[0-2])/([0-2]?[0-9]|3[01])}, 'P\1Y\2M\3D')
     ActiveSupport::Duration.parse(duration_string)
   end

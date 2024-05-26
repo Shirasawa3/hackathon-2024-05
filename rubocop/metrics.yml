@@ -8,3 +8,7 @@ Metrics/ClassLength:
 
 Metrics/AbcSize:
   Enabled: false
+
+# メソッドの長さを50行まで許可
+Metrics/MethodLength:
+  Max: 50

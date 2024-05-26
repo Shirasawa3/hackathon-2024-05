@@ -1,0 +1,11 @@
+<%= form_with(url: target_url, scope: 'upload', method: :post) do |form| %>
+  <div>
+    <%= form.label :csv, I18n.t('views.shared.upload_form.label_csv') %>
+    <%= form.file_field :csv, accept: 'text/csv', required: true %>
+  </div>
+  <div>
+    <%= form.check_box :overwrite %>
+    <%= form.label :overwrite, I18n.t('views.shared.upload_form.overwrite') %>
+  </div>
+  <%= form.submit class: 'btn btn-primary', name: nil %>
+<% end %>
