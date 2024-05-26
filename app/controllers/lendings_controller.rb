@@ -21,7 +21,8 @@ class LendingsController < UserControllerBase
       flash[:success] = I18n.t('success.messages.lend')
       redirect_to root_url
     else
-      render '', status: :unprocessable_entity
+      flash.now[:danger] = I18n.t('success.messages.not-lend')
+      render 'lendings/new', status: :unprocessable_entity
     end
   end
 

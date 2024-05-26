@@ -29,9 +29,9 @@
         <td><%= current.item_basic_info.item_type.name %></td>
         <td><%= current.item_basic_info.name %></td>
         <td><%= current.tag %></td>
-        <td><%= current.lent_at %></td>
-        <td><%= current.period %></td>
-        <td><%= current.returned_at %></td>
+        <td><%= current.lent_at.strftime("%F") %></td>
+        <td><%= current.period.strftime("%F") %></td>
+        <td><%= current.returned_at.present? ? current.returned_at.strftime("%F") : '' %></td>
         <% if !current.returned_at and current.item_basic_info.is_extendable %>
         <td><%= button_to I18n.t('views.users.button-extension'), edit_lending_path(current), method: :get %></td>
         <% end %>
