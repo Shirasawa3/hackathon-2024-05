@@ -1,9 +1,11 @@
-require "test_helper"
-require "generators/use_case/use_case_generator"
+# frozen_string_literal: true
+
+require 'test_helper'
+require 'generators/use_case/use_case_generator'
 
 class UseCaseGeneratorTest < Rails::Generators::TestCase
   tests UseCaseGenerator
-  destination Rails.root.join("tmp/generators")
+  destination Rails.root.join('tmp/generators')
   setup :prepare_destination
 
   # test "generator runs without errors" do
