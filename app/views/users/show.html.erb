@@ -37,7 +37,7 @@
         <td><%= button_to I18n.t('views.users.button-extension'), edit_lending_path(current), method: :get %></td>
         <% end %>
         <% if !current.returned_at %>
-        <td><%= button_to I18n.t('views.users.button-return'), lending_path(current), params: {returned_at: Time.current}, method: :patch %></td>
+        <td><%= button_to I18n.t('views.users.button-return'), lending_path(current), method: :patch, params: { returned_at: Time.current } %></td>
         <% end %>
       </tr>
     <% end %>

@@ -1,8 +1,8 @@
-<header>
+<header class="corp-header">
   <div class="container">
-    <h2>
-      <%= link_to "物品貸出ページ/コーポレート用", corp_items_path %>
-    </h2>
+    <h3>
+      <%= link_to "くらうどハウス貸出（コーポレート用サイト）", corp_items_path %>
+    </h3>
       <ul class="nav navbar-nav navbar-right">
         <% if current_corporate_user %>
           <li style="padding-right: 30px"><h4>ユーザー：<%= current_corporate_user&.full_name %></h4></li>

@@ -33,14 +33,16 @@
       <% types = item_tags.map { |type| [type, type] } %>
       <%= form.select :tag, types, include_blank: "選択して下さい" %>
       <%= form.label :period, I18n.t('views.lendings.period') %>
-      <%= form.date_field :period %>
+      <%= form.date_field :period, min: Time.current %>
       <%= form.submit I18n.t('views.lendings.lend'), class: 'btn btn-primary', name: nil %>
     <% end %>
   <% else %>
     <%= form_with url: lendings_path, method: 'post' do |form| %>
       <%= hidden_field_tag :item_id, @item.id %>
       <%= form.label :period, I18n.t('views.lendings.period') %>
-      <%= form.date_field :period %>
+      <% options = { min: Time.current.to_date } %>
+      <% options[:max] = (Time.current + @item.max_lent_period).to_date if @item.max_lent_period.present? %>
+      <%= form.date_field :period, options %>
       <%= form.submit I18n.t('views.lendings.lend'), class: 'btn btn-primary', name: nil %>
     <% end %>
   <% end %>
