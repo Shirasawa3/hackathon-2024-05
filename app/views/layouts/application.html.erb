@@ -35,7 +35,7 @@
     <div class="container">
       <div class="row flex justify-content-start">
         <div class="col-md-5">
-          <% if user = User.find(session[:user_id]) %>
+          <% if user = User.find_by(id: session[:user_id]) %>
             <%= render 'layouts/user/sidebar' %>
           <% end %>
         </div>
