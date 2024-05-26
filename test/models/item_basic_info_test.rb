@@ -179,10 +179,24 @@ class ItemBasicInfoTest < ActiveSupport::TestCase
   end
 
   describe '.convert_max_lent_period' do
-    test 'returns converted duration' do
-      result = ItemBasicInfo.convert_max_lent_period('1/2/3')
+    context 'when value is nil' do
+      test 'returns nil' do
+        assert_nil ItemBasicInfo.convert_max_lent_period(nil)
+      end
+    end
 
-      assert ActiveSupport::Duration.parse('P1Y2M3D'), result
+    context 'when value is empty' do
+      test 'returns nil' do
+        assert_nil ItemBasicInfo.convert_max_lent_period('')
+      end
+    end
+
+    context 'when value is not blank' do
+      test 'returns converted duration' do
+        result = ItemBasicInfo.convert_max_lent_period('1/2/3')
+
+        assert ActiveSupport::Duration.parse('P1Y2M3D'), result
+      end
     end
   end
 

@@ -85,6 +85,10 @@ ja:
     corp:
       items:
         not_found: "物品ID%{id}のレコードが見つかりませんでした"
+      items_uploads:
+        invalid_mime: CSV以外のファイルはアップロードできません
+        success: "%{success_count}件の物品情報を作成・更新しました"
+        skip: "（%{skip_count}件のスキップ）"
       users:
         not_found: "ユーザーID%{id}のレコードが見つかりませんでした"
   views:
@@ -182,3 +186,8 @@ ja:
       lend: 借りる
       period: 返却予定日
       tag: タグ
+    shared:
+      upload_form:
+        label_csv: CSVファイル
+        overwrite: 既存のレコードを上書きする
+        submit: 読み込み
