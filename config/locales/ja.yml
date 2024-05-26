@@ -97,6 +97,10 @@ ja:
         invalid_mime: CSV以外のファイルはアップロードできません
         success: "%{success_count}件のユーザー情報を作成・更新しました"
         skip: "（%{skip_count}件のスキップ）"
+      corporate_users_uploads:
+        invalid_mime: CSV以外のファイルはアップロードできません
+        success: "%{success_count}件のユーザー情報を作成・更新しました"
+        skip: "（%{skip_count}件のスキップ）"
   views:
     corp:
       _header:
