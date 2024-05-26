@@ -2,6 +2,8 @@ ja:
   success:
     messages:
       lend: レンタルしました
+      return: 返却しました
+      extension: 延長しました
   errors:
     messages:
       email_format: は不正な値です
