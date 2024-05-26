@@ -7,7 +7,7 @@ class LendingsController < UserControllerBase
 
   def edit; end
 
-  def create # rubocop:disable Metrics
+  def create
     @lent_history = if params[:tag]
                       LentHistory.new(user_id: @user.id, item_basic_info_id: @item.id, tag: params[:tag],
                                       lent_at: Time.current, period: params[:period])
