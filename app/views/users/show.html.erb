@@ -3,9 +3,10 @@
 </div>
 
 <div>
-  <%= form_with(model: @user, url: user_path(@user), method: 'get') do |form| %>
-    <%= form.label :type, I18n.t('views.users.status') %>
-
+  <%= form_with(url: user_path(@user), method: 'get') do |form| %>
+    <%= form.label :lent_status, I18n.t('views.users.status') %>
+    <% types = [["貸出中", 1], ["返却済み", 2]] %>
+    <%= form.select :lent_status, types, include_blank: "選択して下さい", selected: params[:lent_status] %>
     <%= form.submit I18n.t('views.corp.items.index.form.submit'), class: 'btn btn-primary', name: nil %>
   <% end %>
 </div>
