@@ -7,7 +7,7 @@
   <div class="row justify-content-between">
     <h3 class="col-md-8"><%= I18n.t('views.corp.users.index.title') %></h3>
     <div class="col-md-1" style="padding-top: 25px">
-      <%= button_to I18n.t('views.corp.users.index.import'), '#', class: 'btn btn-primary' %>
+      <%= button_to I18n.t('views.corp.users.index.import'), new_corp_users_upload_path, method: :get, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>

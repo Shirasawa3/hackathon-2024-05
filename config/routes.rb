@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     namespace :items do
       resources :uploads, only: [:new, :create]
     end
+    namespace :users do
+      resources :uploads, only: [:new, :create]
+    end
   end
 
   root "users#show"
