@@ -35,6 +35,7 @@ class Corp::UploadItemsCsvUseCaseTest < ActiveSupport::TestCase
         assert_equal 'available', noupdated_book_info.status
       end
     end
+
     context 'normal case' do
       test 'create new records' do
         csv_io = StringIO.new <<~CSV

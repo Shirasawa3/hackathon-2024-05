@@ -1,0 +1,5 @@
+Description:
+    Generator of use cases
+
+Example:
+    bin/rails generate use_case CLASS_NAME
