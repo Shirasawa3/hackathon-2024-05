@@ -3,7 +3,7 @@
 require 'test_helper'
 require 'minitest/mock'
 
-class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
+class Corp::CorporateUsers::UploadsControllerTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
   def setup
@@ -20,14 +20,14 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
     context 'as a guest' do
       test 'returns 302 response' do
         logout
-        get new_corp_users_upload_path
+        get new_corp_corporate_users_upload_path
 
         assert_response :found
       end
 
       test 'redirects to sign in page' do
         logout
-        get new_corp_users_upload_path
+        get new_corp_corporate_users_upload_path
 
         assert_redirected_to new_corporate_user_session_path
       end
@@ -35,7 +35,7 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
 
     context 'as a user' do
       test 'returns 200 response' do
-        get new_corp_users_upload_path
+        get new_corp_corporate_users_upload_path
         assert_response :ok
       end
     end
@@ -45,14 +45,14 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
     context 'as a guest' do
       test 'returns 302 response' do
         logout
-        post corp_users_uploads_path
+        post corp_corporate_users_uploads_path
 
         assert_response :found
       end
 
       test 'redirects to sign in page' do
         logout
-        post corp_users_uploads_path
+        post corp_corporate_users_uploads_path
 
         assert_redirected_to new_corporate_user_session_path
       end
@@ -62,10 +62,10 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
       context 'when file type is invalid' do
         test 'returns 302 response' do
           mock_use_case = Minitest::Mock.new
-          mock_use_case.expect(:execute, Corp::UploadUsersCsvUseCase::Result.new(3, 1), [IO, true])
+          mock_use_case.expect(:execute, Corp::UploadCorporateUsersCsvUseCase::Result.new(3, 1), [IO, true])
 
-          Corp::UploadUsersCsvUseCase.stub :new, mock_use_case do
-            post corp_users_uploads_path, params: {
+          Corp::UploadCorporateUsersCsvUseCase.stub :new, mock_use_case do
+            post corp_corporate_users_uploads_path, params: {
               upload: {
                 overwrite: '1',
                 csv: fixture_file_upload('csvs/users/test.csv', 'text/plain'),
@@ -78,10 +78,10 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
 
         test 'redirects to #new' do
           mock_use_case = Minitest::Mock.new
-          mock_use_case.expect(:execute, Corp::UploadUsersCsvUseCase::Result.new(3, 1), [IO, true])
+          mock_use_case.expect(:execute, Corp::UploadCorporateUsersCsvUseCase::Result.new(3, 1), [IO, true])
 
-          Corp::UploadUsersCsvUseCase.stub :new, mock_use_case do
-            post corp_users_uploads_path, params: {
+          Corp::UploadCorporateUsersCsvUseCase.stub :new, mock_use_case do
+            post corp_corporate_users_uploads_path, params: {
               upload: {
                 overwrite: '1',
                 csv: fixture_file_upload('csvs/users/test.csv', 'text/plain'),
@@ -89,15 +89,15 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
             }
           end
 
-          assert_redirected_to new_corp_users_upload_path
+          assert_redirected_to new_corp_corporate_users_upload_path
         end
 
         test 'sets flash message' do
           mock_use_case = Minitest::Mock.new
-          mock_use_case.expect(:execute, Corp::UploadUsersCsvUseCase::Result.new(3, 1), [IO, true])
+          mock_use_case.expect(:execute, Corp::UploadCorporateUsersCsvUseCase::Result.new(3, 1), [IO, true])
 
-          Corp::UploadUsersCsvUseCase.stub :new, mock_use_case do
-            post corp_users_uploads_path, params: {
+          Corp::UploadCorporateUsersCsvUseCase.stub :new, mock_use_case do
+            post corp_corporate_users_uploads_path, params: {
               upload: {
                 overwrite: '1',
                 csv: fixture_file_upload('csvs/users/test.csv', 'text/plain'),
@@ -112,10 +112,10 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
       context 'normal case' do
         test 'returns 302 response' do
           mock_use_case = Minitest::Mock.new
-          mock_use_case.expect(:execute, Corp::UploadUsersCsvUseCase::Result.new(3, 1), [IO, true])
+          mock_use_case.expect(:execute, Corp::UploadCorporateUsersCsvUseCase::Result.new(3, 1), [IO, true])
 
-          Corp::UploadUsersCsvUseCase.stub :new, mock_use_case do
-            post corp_users_uploads_path, params: {
+          Corp::UploadCorporateUsersCsvUseCase.stub :new, mock_use_case do
+            post corp_corporate_users_uploads_path, params: {
               upload: {
                 overwrite: '1',
                 csv: fixture_file_upload('csvs/users/test.csv', 'text/csv'),
@@ -128,10 +128,10 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
 
         test 'redirects to #new' do
           mock_use_case = Minitest::Mock.new
-          mock_use_case.expect(:execute, Corp::UploadUsersCsvUseCase::Result.new(3, 1), [IO, true])
+          mock_use_case.expect(:execute, Corp::UploadCorporateUsersCsvUseCase::Result.new(3, 1), [IO, true])
 
-          Corp::UploadUsersCsvUseCase.stub :new, mock_use_case do
-            post corp_users_uploads_path, params: {
+          Corp::UploadCorporateUsersCsvUseCase.stub :new, mock_use_case do
+            post corp_corporate_users_uploads_path, params: {
               upload: {
                 overwrite: '1',
                 csv: fixture_file_upload('csvs/users/test.csv', 'text/csv'),
@@ -139,15 +139,15 @@ class Corp::Users::UploadsControllerTest < ActionDispatch::IntegrationTest
             }
           end
 
-          assert_redirected_to new_corp_users_upload_path
+          assert_redirected_to new_corp_corporate_users_upload_path
         end
 
         test 'sets flash message' do
           mock_use_case = Minitest::Mock.new
-          mock_use_case.expect(:execute, Corp::UploadUsersCsvUseCase::Result.new(3, 1), [IO, true])
+          mock_use_case.expect(:execute, Corp::UploadCorporateUsersCsvUseCase::Result.new(3, 1), [IO, true])
 
-          Corp::UploadUsersCsvUseCase.stub :new, mock_use_case do
-            post corp_users_uploads_path, params: {
+          Corp::UploadCorporateUsersCsvUseCase.stub :new, mock_use_case do
+            post corp_corporate_users_uploads_path, params: {
               upload: {
                 overwrite: '1',
                 csv: fixture_file_upload('csvs/users/test.csv', 'text/csv'),
