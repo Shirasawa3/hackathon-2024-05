@@ -176,6 +176,9 @@ ja:
       status: 貸出状況
       extension: 延長する
       return: 返却する
+      _sidebar:
+        history: あなたの貸出状況
+        items: レンタルする
     items:
       stocks: 在庫数
       total_count: 総数
