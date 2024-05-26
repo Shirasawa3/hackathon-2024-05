@@ -5,7 +5,9 @@ class LendingsController < UserControllerBase
 
   def new; end
 
-  def edit; end
+  def edit
+    @lent_history = LentHistory.find_by(id: params[:id])
+  end
 
   def create
     @lent_history = if params[:tag]
@@ -23,11 +25,22 @@ class LendingsController < UserControllerBase
     end
   end
 
-  def update; end
+  def update
+    @lent_history = LentHistory.find_by(id: params[:id])
+    if params[:period]
+      @lent_history.update(period: params[:period])
+      flash[:success] = I18n.t('success.messages.extension')
+      redirect_to root_url
+    elsif params[:returned_at]
+      @lent_history.update(returned_at: params[:returned_at])
+      flash[:success] = I18n.t('success.messages.return')
+      redirect_to root_url
+    end
+  end
 
   private
 
   def now_item
-    @item = ItemBasicInfo.find_by(id: params[:item_id])
+    @item = ItemBasicInfo.find_by(id: params[:item_id]) if params[:item_id]
   end
 end

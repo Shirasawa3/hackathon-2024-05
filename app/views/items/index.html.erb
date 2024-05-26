@@ -31,7 +31,9 @@
         <% total_count = current.count || current.tags.length %>
         <td><%= total_count - current.lent_histories.in_lent.count %></td>
         <td><%= total_count %></td>
+        <% if total_count > 0 %>
         <td><%= button_to I18n.t('views.items.lend'), { controller: 'lendings', action: 'new' }, { method: :get, params: { item_id: current.id } } %></td>
+        <% end %>
       </tr>
     <% end %>
   </table>
