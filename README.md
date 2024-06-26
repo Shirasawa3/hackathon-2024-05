@@ -2,6 +2,9 @@
 
 番場・白澤チーム
 
+## 制作物
+<img width="1447" alt="image" src="https://github.com/Shirasawa3/hackathon-2024-05/assets/156413299/6ae027e5-4503-43b0-808f-8b13db5d0d6c">
+
 ## 環境構築
 
 ### PostgreSQL
