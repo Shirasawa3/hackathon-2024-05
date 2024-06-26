@@ -4,7 +4,9 @@
 
 ## 制作物の概要
 <img width="1447" alt="image" src="https://github.com/Shirasawa3/hackathon-2024-05/assets/156413299/6ae027e5-4503-43b0-808f-8b13db5d0d6c">
+ユーザー用画面
 <img width="1227" alt="image" src="https://github.com/Shirasawa3/hackathon-2024-05/assets/156413299/554895f9-5998-45d9-af71-49699f225305">
+管理者用画面
 <img width="1215" alt="image" src="https://github.com/Shirasawa3/hackathon-2024-05/assets/156413299/6c8e8914-e23d-4e4d-b81a-932f2b448294">
 
 ## 環境構築
